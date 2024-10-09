@@ -1,6 +1,6 @@
 <?php
 if ($argc != 4) {
-  echo "Hibás paraméterek";
+  echo "Hibás paraméterek\n";
   exit(1);
 }
 
@@ -9,7 +9,7 @@ $b = $argv[2];
 $c = $argv[3];
 
 if ($a + $b <= $c || $a + $c <= $b || $b + $c <= $a) {
-  echo "A háromszög nem szerkeszthető";
+  echo "A háromszög nem szerkeszthető\n";
   exit(1);
 }
 
@@ -18,5 +18,4 @@ $s = ($a + $b + $c) / 2;
 $t = round(sqrt($s * ($s - $a) * ($s - $b) * ($s - $c)), 3);
 
 echo "T=$t\n";
-echo "K=$k";
-?>
+echo "K=$k\n";

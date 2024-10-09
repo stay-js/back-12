@@ -6,11 +6,12 @@ if ($argc != 3) {
 
 if ($argv[1] < $argv[2]) {
   for ($i = $argv[1]; $i <= $argv[2]; $i++) {
-    if ($i % 2 != 0) echo "$i\n";
+    if ($i % 2 != 0)
+      echo "$i\n";
   }
 } else {
   for ($i = $argv[1]; $i >= $argv[2]; $i--) {
-    if ($i % 2 != 0) echo "$i\n";
+    if ($i % 2 != 0)
+      echo "$i\n";
   }
 }
-?>
