@@ -17,7 +17,7 @@ if (!is_numeric($value)) {
   exit(1);
 }
 
-if (!in_array($unit, array("c", "celsius", "f", "fahrenheit"))) {
+if (!in_array($unit, ["c", "celsius", "f", "fahrenheit"])) {
   echo "Hibás mértékegység\n";
   exit(1);
 }
