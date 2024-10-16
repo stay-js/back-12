@@ -32,11 +32,6 @@ if ($argc == 2) {
 $type = $argv[1];
 $query = $argv[2];
 
-if (!in_array($type, ["legitarsasag", "repter"])) {
-  echo "Ismeretlen paraméter $type\n";
-  exit(9);
-}
-
 if ($type == "legitarsasag") {
   $count = 0;
 
@@ -50,6 +45,7 @@ if ($type == "legitarsasag") {
 }
 
 if ($type == "repter") {
+  $query = strtoupper($query);
   $count = 0;
 
   foreach ($jaratok as $jarat) {
@@ -60,3 +56,6 @@ if ($type == "repter") {
 
   exit(0);
 }
+
+echo "Ismeretlen paraméter $type\n";
+exit(9);
