@@ -16,8 +16,7 @@ echo $szamok[count($szamok) - 1] . "\n";
 
 echo "\n5.feladat\n";
 foreach ($szamok as $szam) {
-  if ($szam % 2 == 0)
-    echo $szam . "\n";
+  if ($szam % 2 == 0) echo $szam . "\n";
 }
 
 echo "\n6.feladat\n";

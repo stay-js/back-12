@@ -6,18 +6,16 @@ if ($argc != 2) {
   exit(1);
 }
 
-$valid = ["szamok", "egesz", "valos", "szoveg"];
-
-if (!in_array($argv[1], $valid)) {
+if (!in_array($argv[1], ["szamok", "egesz", "valos", "szoveg"])) {
   echo "A paraméter csak 'szamok', 'egesz', 'valos', vagy 'szoveg' lehet.\n";
   exit(1);
 }
 
 if ($argv[1] == "szamok") {
   $szamok = [];
+
   foreach ($vegyes as $item) {
-    if (is_numeric($item))
-      $szamok[] = $item;
+    if (is_numeric($item)) $szamok[] = $item;
   }
 
   foreach ($szamok as $idx => $item) {
@@ -27,9 +25,9 @@ if ($argv[1] == "szamok") {
 
 if ($argv[1] == "egesz") {
   $egesz = [];
+
   foreach ($vegyes as $item) {
-    if (is_int($item))
-      $egesz[] = $item;
+    if (is_int($item)) $egesz[] = $item;
   }
 
   foreach ($egesz as $idx => $item) {
@@ -39,9 +37,9 @@ if ($argv[1] == "egesz") {
 
 if ($argv[1] == "valos") {
   $valos = [];
+
   foreach ($vegyes as $item) {
-    if (is_float($item))
-      $valos[] = $item;
+    if (is_float($item)) $valos[] = $item;
   }
 
   foreach ($valos as $idx => $item) {
@@ -51,9 +49,9 @@ if ($argv[1] == "valos") {
 
 if ($argv[1] == "szoveg") {
   $szovegek = [];
+
   foreach ($vegyes as $item) {
-    if (is_string($item))
-      $szovegek[] = $item;
+    if (is_string($item)) $szovegek[] = $item;
   }
 
   foreach ($szovegek as $idx => $item) {

@@ -16,6 +16,7 @@ if ($argc == 1) {
 
 if ($argc == 2) {
   $input = strtoupper($argv[1]);
+
   if (!array_key_exists($input, $jaratok)) {
     echo "A keresett járat ($input) nem található!\n";
     exit(7);
@@ -38,10 +39,9 @@ if (!in_array($type, ["legitarsasag", "repter"])) {
 
 if ($type == "legitarsasag") {
   $count = 0;
+
   foreach ($jaratok as $jarat) {
-    if ($jarat["legitarsasag"] == $query) {
-      $count++;
-    }
+    if ($jarat["legitarsasag"] == $query) $count++;
   }
 
   echo "A(z) $query légitársaságnak $count járata van az adatok között.\n";
@@ -51,10 +51,9 @@ if ($type == "legitarsasag") {
 
 if ($type == "repter") {
   $count = 0;
+
   foreach ($jaratok as $jarat) {
-    if ($jarat["indulas"] == $query || $jarat["erkezes"] == $query) {
-      $count++;
-    }
+    if ($jarat["indulas"] == $query || $jarat["erkezes"] == $query) $count++;
   }
 
   echo "A(z) $query azonosítójú reptér $count x szerepel az adatok között.\n";
