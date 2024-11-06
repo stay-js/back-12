@@ -1,5 +1,4 @@
 <?php
-
 function hetNapja(int $number): string
 {
   switch ($number) {
@@ -141,10 +140,56 @@ function elsoNOsszeg(array $array, int $n): int
 
 function f2c(float $value): float
 {
-  return ($value - 32) * 5 / 9;
+  return round(($value - 32) * 5 / 9, 2);
 }
 
 function c2f(float $value): float
 {
-  return $value * 9 / 5 + 32;
+  return round($value * 9 / 5 + 32, 2);
+}
+
+function fogyasztas(int $km, float $liter): float
+{
+  return round($liter / $km * 100, 2);
+}
+
+
+function felKerekites(float $number): int
+{
+  return ceil($number);
+}
+
+function leKerekites(float $number): int
+{
+  return floor($number);
+}
+
+function matematikaiKerekites(float $number): int
+{
+  return round($number);
+}
+
+function ftKerekites(int $number)
+{
+  $lastDigit = $number % 10;
+
+  switch ($lastDigit) {
+    case 1:
+    case 2:
+      return $number - $lastDigit;
+    case 8:
+    case 9:
+      return $number + (10 - $lastDigit);
+    default:
+      return $number + (5 - $lastDigit);
+  }
+}
+
+function bankarKerekites(float $number): int
+{
+  $rounded = round($number);
+
+  if ($rounded % 2 == 0) return $rounded;
+  if ($rounded < $number) return $rounded + 1;
+  return $rounded - 1;
 }
