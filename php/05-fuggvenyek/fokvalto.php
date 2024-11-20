@@ -12,7 +12,7 @@ if ($argc > 3) {
 }
 
 $value = $argv[1];
-$unit = strtolower($argv[2]);
+$unit = mb_strtolower($argv[2]);
 
 if (!is_numeric($value)) {
   echo "Hibás hőfok\n";

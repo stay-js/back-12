@@ -23,7 +23,7 @@ function hetNapja(int $number): string
 
 function napSorszama(string $str): int
 {
-  switch (strtolower($str)) {
+  switch (mb_strtolower($str)) {
     case "hétfő":
       return 1;
     case "kedd":

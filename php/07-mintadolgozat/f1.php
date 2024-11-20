@@ -6,7 +6,7 @@ if ($argc > 2) {
   exit(4);
 }
 
-$vb = array_sum(array_map(fn($x) => $x['vb'], $versenyzok));
+$vb = fn(): int => array_sum(array_map(fn($x) => $x['vb'], $versenyzok));
 
 $dobogo = function (int $rajtszam) use ($versenyzok): int {
   foreach ($versenyzok as $versenyzo) {
@@ -19,15 +19,16 @@ $dobogo = function (int $rajtszam) use ($versenyzok): int {
 
 if ($argc == 1) {
   foreach ($versenyzok as $versenyzo) {
-    echo $versenyzo['nev'] . ' (' . $versenyzo['rajtszam'] . ') [' .  $versenyzo['csapat'] . ']' . PHP_EOL;
+    echo explode(" ", $versenyzo['nev'])[1] . ' (' . $versenyzo['rajtszam'] . ') [' .  $versenyzo['csapat'] . ']' . PHP_EOL;
   }
+
   exit(0);
 }
 
 $arg = mb_strtolower($argv[1]);
 
 if ($arg == 'vb') {
-  echo $vb . PHP_EOL;
+  echo $vb() . PHP_EOL;
   exit(0);
 }
 

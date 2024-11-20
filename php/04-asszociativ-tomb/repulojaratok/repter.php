@@ -15,7 +15,7 @@ if ($argc == 1) {
 }
 
 if ($argc == 2) {
-  $input = strtoupper($argv[1]);
+  $input = mb_strtoupper($argv[1]);
 
   if (!array_key_exists($input, $jaratok)) {
     echo "A keresett járat ($input) nem található!\n";
@@ -45,7 +45,7 @@ if ($type == "legitarsasag") {
 }
 
 if ($type == "repter") {
-  $query = strtoupper($query);
+  $query = mb_strtoupper($query);
   $count = 0;
 
   foreach ($jaratok as $jarat) {
