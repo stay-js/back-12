@@ -4,12 +4,9 @@ declare(strict_types=1);
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
-
 require __DIR__ . '/vendor/autoload.php';
 
 use MediaCompany\AudioVideo\Fenykepezogep;
-
-$faker = Faker\Factory::create("hu_HU");
 
 if ($argc < 2) {
   echo "A szkriptnek nem lett megadva a kimeneti fájl neve!" . PHP_EOL;
@@ -24,11 +21,11 @@ if (!in_array($fileType, ['txt', 'csv'])) {
   exit(7);
 }
 
-$records = $faker->numberBetween(1, 10);
+$faker = Faker\Factory::create("hu_HU");
 
-if ($argc == 3 && $argv[2] > 0) {
-  $records = $argv[2];
-}
+$records = $argc == 3 && $argv[2] > 0
+  ? $argv[2]
+  : $faker->numberBetween(1, 10);
 
 $cameras = [];
 
