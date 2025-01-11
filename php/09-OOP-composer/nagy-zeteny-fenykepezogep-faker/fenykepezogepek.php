@@ -17,10 +17,9 @@ if ($argc < 2) {
 }
 
 $file = $argv[1];
+$fileType = explode('.', $file)[1];
 
-$fileParts = explode('.', $file);
-
-if (!in_array($fileParts[1], ['txt', 'csv'])) {
+if (!in_array($fileType, ['txt', 'csv'])) {
   echo "A kimeneti fájl kiterjesztése csak `txt` vagy `csv` lehet!" . PHP_EOL;
   exit(7);
 }
@@ -45,7 +44,7 @@ for ($i = 0; $i < $records; $i++) {
 
 $output = fopen(("out/" . $file), 'w');
 
-$serparator = $fileParts[1] == 'txt' ? PHP_EOL : ";";
+$serparator = $fileType == 'txt' ? PHP_EOL : ";";
 
 foreach ($cameras as $camera) {
   fwrite($output, implode($serparator, [
