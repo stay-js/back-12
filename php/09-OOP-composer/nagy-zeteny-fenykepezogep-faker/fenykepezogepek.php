@@ -45,22 +45,15 @@ for ($i = 0; $i < $records; $i++) {
 
 $output = fopen(("out/" . $file), 'w');
 
-if ($fileParts[1] == 'txt') {
-  foreach ($cameras as $camera) {
-    fwrite($output, $camera->getSorszam() . PHP_EOL);
-    fwrite($output, $camera->getTeljesNev() . PHP_EOL);
-    fwrite($output, $camera->getSorozatszam() . PHP_EOL);
-    fwrite($output, $camera->getGyartasiEv() . PHP_EOL);
-  }
-} else {
-  foreach ($cameras as $camera) {
-    fputcsv($output, [
-      $camera->getSorszam(),
-      $camera->getTeljesNev(),
-      $camera->getSorozatszam(),
-      $camera->getGyartasiEv()
-    ], ";");
-  }
+$serparator = $fileParts[1] == 'txt' ? PHP_EOL : ";";
+
+foreach ($cameras as $camera) {
+  fwrite($output, implode($serparator, [
+    $camera->getSorszam(),
+    $camera->getTeljesNev(),
+    $camera->getSorozatszam(),
+    $camera->getGyartasiEv()
+  ]) . PHP_EOL);
 }
 
 fclose($output);
