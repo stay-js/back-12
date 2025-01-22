@@ -6,7 +6,8 @@ error_reporting(E_ALL);
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Acme\Iskola\Jegy;
+use Acme\Iskola\Jegy as Osztalyzat;
+use Acme\Mozi\Jegy as MoziJegy;
 use Faker\Factory;
 
 if ($argc < 3) {
@@ -16,8 +17,8 @@ if ($argc < 3) {
 
 $tipus = $argv[1];
 
-if (!in_array($tipus, ["busz", "mozi", "osztalyzat", "repulo"])) {
-  echo "Az első paraméter csak 'busz', 'mozi', 'osztalyzat' vagy 'repulo' lehet!" . PHP_EOL;
+if (!in_array($tipus, ["mozi", "osztalyzat"])) {
+  echo "Az első paraméter csak 'mozi' vagy 'osztalyzat' lehet!" . PHP_EOL;
   exit(7);
 }
 
@@ -47,10 +48,10 @@ $jegyek = [];
 
 if ($tipus == "osztalyzat") {
   for ($i = 0; $i < $darabszam; $i++) {
-    $jegyek[] = new Jegy(
-      $faker->randomElement(Jegy::lehetsegesTipusok()),
+    $jegyek[] = new Osztalyzat(
+      $faker->randomElement(Osztalyzat::lehetsegesTipusok()),
       $faker->numberBetween(1, 5),
-      $faker->randomElement(Jegy::lehetsegesTantargyak()),
+      $faker->randomElement(Osztalyzat::lehetsegesTantargyak()),
       $faker->name(),
       $faker->dateTimeBetween("-2 weeks")
     );
