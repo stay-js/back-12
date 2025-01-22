@@ -50,7 +50,7 @@ if ($tipus == "osztalyzat") {
     $jegyek[] = new Jegy(
       $faker->randomElement(Jegy::lehetsegesTipusok()),
       $faker->numberBetween(1, 5),
-      $faker->word(),
+      $faker->randomElement(Jegy::lehetsegesTantargyak()),
       $faker->name(),
       $faker->dateTimeBetween("-2 weeks")
     );
@@ -64,14 +64,14 @@ if ($tipus == "osztalyzat") {
 
   if ($kimenet == "json") {
     $json = json_encode(array_map(fn($x) => $x->toArray(true), $jegyek), JSON_PRETTY_PRINT);
-    file_put_contents("out/jegyek.json", $json);
+    file_put_contents("out/osztalyzatok.json", $json);
   }
 
   if ($kimenet == "csv") {
-    $output = fopen("out/jegyek.csv", 'w');
+    $output = fopen("out/osztalyzatok.csv", 'w');
 
     foreach ($jegyek as $jegy) {
-      fputcsv($output, $jegy->toArray(false));
+      fputcsv($output, $jegy->toArray(false), ";");
     }
 
     fclose($output);

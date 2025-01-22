@@ -9,6 +9,7 @@ class Jegy implements Stringable
 {
   private static array $tipusok = ["Témazáró", "Órai munka", "Teszt"];
   private static array $osztalyzatok = ["elégtelen", "elégséges", "közepes", "jó", "jeles"];
+  private static array $tantargyak = ["Magyar", "Matematika", "Történelem", "Fizika", "Kémia", "Angol", "Német", "Testnevelés", "Informatika", "Biológia"];
 
   private string $tipus;
   private int $jegy;
@@ -24,6 +25,11 @@ class Jegy implements Stringable
   public static function lehetsegesOsztalyzatok(): array
   {
     return self::$osztalyzatok;
+  }
+
+  public static function lehetsegesTantargyak(): array
+  {
+    return self::$tantargyak;
   }
 
   public function __construct(string $tipus, int $jegy, string $tantargy, string $tanar, DateTime $beirva)
