@@ -42,39 +42,57 @@ if ($argc == 4) {
   }
 }
 
-$faker = Factory::create("hu_HU");
+$jegyek = generateTickets($tipus, (int)$darabszam);
 
-$jegyek = [];
+if ($kimenet == null) {
+  foreach ($jegyek as $jegy) {
+    echo $jegy . PHP_EOL;
+  }
 
-if ($tipus == "osztalyzat") {
+  exit(0);
+}
+
+$outPath = "out/" . ($tipus == "osztalyzat" ? "osztalyzatok" : "mozi") . "." . $kimenet;
+
+if ($kimenet == "json") {
+  $json = json_encode(array_map(fn($x) => $x->toArray(true), $jegyek), JSON_PRETTY_PRINT);
+  file_put_contents($outPath, $json);
+
+  exit(0);
+}
+
+$output = fopen($outPath, 'w');
+
+foreach ($jegyek as $jegy) {
+  fputcsv($output, $jegy->toArray(false), ";");
+}
+
+fclose($output);
+
+
+function generateTickets(string $tipus, int $darabszam): array
+{
+  $faker = Factory::create("hu_HU");
+
+  $jegyek = [];
+
   for ($i = 0; $i < $darabszam; $i++) {
-    $jegyek[] = new Osztalyzat(
+    $jegyek[] = $tipus == "osztalyzat" ? new Osztalyzat(
       $faker->randomElement(Osztalyzat::lehetsegesTipusok()),
       $faker->numberBetween(1, 5),
       $faker->randomElement(Osztalyzat::lehetsegesTantargyak()),
       $faker->name(),
       $faker->dateTimeBetween("-2 weeks")
+    ) : new MoziJegy(
+      $faker->text(40),
+      (int)($faker->numberBetween(9, 19) . "90"),
+      $faker->randomElement(MoziJegy::termekNevei()),
+      mb_strtoupper($faker->randomLetter()),
+      $faker->numberBetween(1, 60),
+      $faker->dateTimeBetween("+1 day", "+30 days"),
+      $faker->boolean()
     );
   }
 
-  if ($kimenet == null) {
-    foreach ($jegyek as $jegy) {
-      echo $jegy . PHP_EOL;
-    }
-  }
-
-  if ($kimenet == "json") {
-    $json = json_encode(array_map(fn($x) => $x->toArray(true), $jegyek), JSON_PRETTY_PRINT);
-    file_put_contents("out/osztalyzatok.json", $json);
-  }
-
-  if ($kimenet == "csv") {
-    $output = fopen("out/osztalyzatok.csv", 'w');
-
-    foreach ($jegyek as $jegy) {
-      fputcsv($output, $jegy->toArray(false), ";");
-    }
-
-    fclose($output);
-  }
+  return $jegyek;
 }
