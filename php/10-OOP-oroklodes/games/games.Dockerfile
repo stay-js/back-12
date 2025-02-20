@@ -14,13 +14,17 @@ RUN adduser -D -u 1000 -s /bin/bash phpdocker \
 
 COPY --from=composer:2.7.7 /usr/bin/composer /usr/bin/composer
 
+
 COPY composer.json composer.json
 COPY composer.lock composer.lock
 
 RUN composer install
+RUN composer dump-autoload -o
+
+RUN rm composer.json composer.lock
 
 COPY . .
 
 USER phpdocker
 
-ENTRYPOINT [ "php", "fenykepezogepek.php" ]
+ENTRYPOINT [ "php", "games.php" ]
